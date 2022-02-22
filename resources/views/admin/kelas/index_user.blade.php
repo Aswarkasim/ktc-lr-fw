@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-12">
 
-  {{-- <a href="/admin/kelas/create" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah</a>
+  <a href="/admin/kelas/create" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah</a>
 
   <div class="float-right">
     <form action="" method="get">
@@ -15,14 +15,14 @@
         </span>
       </div>
       </form>
-  </div> --}}
-<h4><b>LIST TUGAS</b></h4>
+  </div>
+
 
   <div class="row">
-    @foreach ($tugas as $item)
+    @foreach ($kelas as $item)
         
     <div class="col-md-3">
-      <a href="/admin/tugas/{{$item->id}}">
+      <a href="/admin/kelas/{{$item->id}}">
         <div class="card-list rounded p-2">
           <p class="nama-judul mt-3"><b> {{$item->name}} </b></p>
         </div>
@@ -32,7 +32,7 @@
   </div>
 
   <div class="float-right">
-    {{$tugas->links()}}
+    {{$kelas->links()}}
   </div>
 
 
@@ -40,3 +40,5 @@
 </div>
 
 <!-- /.card-body -->
+
+

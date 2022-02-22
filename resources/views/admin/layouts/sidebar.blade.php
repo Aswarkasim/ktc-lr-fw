@@ -25,7 +25,26 @@
             </a>
           </li>
 
-            <li class="nav-item {{Request::is('admin/posts*') ? 'menu-open' : ''}}">
+           {{-- <li class="nav-item">
+            <a href="/admin/siswa" class="nav-link {{Request::is('admin/siswa') ? 'active' : ''}}">
+              <i class="nav-icon fas fa-graduation-cap"></i>
+              <p>
+                Siswa
+              </p>
+            </a>
+          </li> --}}
+
+
+          <li class="nav-item">
+            <a href="/admin/kelas" class="nav-link {{Request::is('admin/kelas') ? 'active' : ''}}">
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+                Kelas
+              </p>
+            </a>
+          </li>
+
+            {{-- <li class="nav-item {{Request::is('admin/posts*') ? 'menu-open' : ''}}">
             <a href="#" class="nav-link {{Request::is('admin/posts*') ? 'active' : ''}}">
               <i class="nav-icon fas fa-newspaper"></i>
               <p>
@@ -47,7 +66,10 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
+
+          @if (auth()->user()->role == 'admin')
+              
 
           <li class="nav-item {{Request::is('admin/user*') ? 'menu-open' : ''}}">
             <a href="#" class="nav-link {{Request::is('admin/user*') ? 'active' : ''}}">
@@ -90,6 +112,9 @@
               </p>
             </a>
           </li>
+
+          @endif
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

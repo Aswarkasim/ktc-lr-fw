@@ -26,7 +26,7 @@ class AdminPostController extends Controller
             $post = Post::latest()->paginate(10);
         }
         $data = [
-            'title'   => 'Manajemen Artikel',
+            'title'   => 'Manajemen Kelas',
             'post' => $post,
             'content' => 'admin/post/index'
         ];

@@ -5,9 +5,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminKelasController;
+use App\Http\Controllers\AdminNilaiController;
+use App\Http\Controllers\AdminSiswaController;
+use App\Http\Controllers\AdminTugasController;
 use App\Http\Controllers\AdminBannerController;
 use App\Http\Controllers\AdminCategoryPostController;
 use App\Http\Controllers\AdminConfigurationController;
+use App\Http\Controllers\AdminDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +30,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 
 Route::prefix('/admin/auth')->group(function () {
-    Route::get('/', [AdminAuthController::class, 'index'])->middleware('guest');
+    Route::get('/', [AdminAuthController::class, 'index'])->middleware('guest')->name('login');
     Route::post('/login', [AdminAuthController::class, 'login']);
 
     Route::get('/register', [AdminAuthController::class, 'register']);
@@ -34,13 +39,9 @@ Route::prefix('/admin/auth')->group(function () {
 });
 
 
-Route::prefix('/admin')->group(function () {
-    Route::get('/dashboard', function () {
-        $data = [
-            'content' => 'admin/dashboard/index'
-        ];
-        return view('admin/layouts/wrapper', $data);
-    });
+Route::prefix('/admin')->middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [AdminDashboardController::class, 'index']);
 
     Route::resource('/user', AdminUserController::class);
 
@@ -48,12 +49,19 @@ Route::prefix('/admin')->group(function () {
     Route::put('/konfigurasi/update', [AdminConfigurationController::class, 'update']);
 
     Route::resource('/banner', AdminBannerController::class);
+    Route::resource('/kelas', AdminKelasController::class);
+    Route::resource('/siswa', AdminSiswaController::class);
+    Route::get('/tugas/is_done', [AdminTugasController::class, 'is_done']);
+    Route::resource('/tugas', AdminTugasController::class);
 
 
     Route::prefix('/posts')->group(function () {
         Route::resource('/post', AdminPostController::class);
         Route::resource('/kategori', AdminCategoryPostController::class);
     });
+
+
+    Route::get('/nilai/update', [AdminNilaiController::class, 'update']);
 });
 
 Route::prefix('/home')->group(function () {
